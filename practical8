@@ -1,0 +1,44 @@
+#include <stdio.h>
+
+// Function to swap motor speeds using pointers
+void swapSpeeds(int *motor1, int *motor2) {
+    int temp = *motor1;
+    *motor1 = *motor2;
+    *motor2 = temp;
+}
+
+int main() {
+    int speed1, speed2;
+    int origSpeed1, origSpeed2;
+
+    // Input speeds of the two robot motors
+    printf("Enter speed of Motor 1 (RPM): ");
+    scanf("%d", &speed1);
+
+    printf("Enter speed of Motor 2 (RPM): ");
+    scanf("%d", &speed2);
+
+    // Store original values to verify the swap later
+    origSpeed1 = speed1;
+    origSpeed2 = speed2;
+
+    printf("\nBefore swapping:\n");
+    printf("Motor 1 -> Speed: %d RPM | Memory Address: %p\n", speed1, (void*)&speed1);
+    printf("Motor 2 -> Speed: %d RPM | Memory Address: %p\n", speed2, (void*)&speed2);
+
+    // Swap speeds using pointers
+    swapSpeeds(&speed1, &speed2);
+
+    printf("\nAfter swapping:\n");
+    printf("Motor 1 -> Speed: %d RPM | Memory Address: %p\n", speed1, (void*)&speed1);
+    printf("Motor 2 -> Speed: %d RPM | Memory Address: %p\n", speed2, (void*)&speed2);
+
+    // Verify the swap
+    if (speed1 == origSpeed2 && speed2 == origSpeed1) {
+        printf("\nVerification: Swap successful! Speeds exchanged at the same memory addresses.\n");
+    } else {
+        printf("\nVerification: Swap failed.\n");
+    }
+
+    return 0;
+}
